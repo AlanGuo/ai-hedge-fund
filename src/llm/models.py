@@ -20,6 +20,7 @@ class ModelProvider(str, Enum):
     GEMINI = "Gemini"
     GROQ = "Groq"
     OPENAI = "OpenAI"
+    OPENAI_COMPATIBLE = "OpenAI Compatible"
     OLLAMA = "Ollama"
 
 
@@ -116,6 +117,14 @@ def get_model(model_name: str, model_provider: ModelProvider) -> ChatOpenAI | Ch
             print(f"API Key Error: Please make sure OPENAI_API_KEY is set in your .env file.")
             raise ValueError("OpenAI API key not found.  Please make sure OPENAI_API_KEY is set in your .env file.")
         return ChatOpenAI(model=model_name, api_key=api_key)
+    elif model_provider == ModelProvider.OPENAI_COMPATIBLE:
+        api_key = os.getenv("OPENAI_API_KEY")
+        base_url = os.getenv("OPENAI_BASE_URL", "https://api.openai.com/v1")
+        if not api_key:
+            # Print error to console
+            print(f"API Key Error: Please make sure OPENAI_API_KEY is set in your .env file.")
+            raise ValueError("OpenAI API key not found.  Please make sure OPENAI_API_KEY is set in your .env file.")
+        return ChatOpenAI(model=model_name, api_key=api_key, base_url=base_url)
     elif model_provider == ModelProvider.ANTHROPIC:
         api_key = os.getenv("ANTHROPIC_API_KEY")
         if not api_key:

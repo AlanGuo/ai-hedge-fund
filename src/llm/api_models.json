@@ -63,5 +63,15 @@
     "display_name": "[openai] o4-mini",
     "model_name": "o4-mini",
     "provider": "OpenAI"
+  },
+  {
+    "display_name": "[openai-compatible] gpt-4o-mini",
+    "model_name": "gpt-4o-mini",
+    "provider": "OpenAI Compatible"
+  },
+  {
+    "display_name": "[openai-compatible] chatgpt-4o-latest",
+    "model_name": "chatgpt-4o-latest",
+    "provider": "OpenAI Compatible"
   }
 ] 
